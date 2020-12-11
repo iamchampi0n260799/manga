@@ -1,17 +1,20 @@
+
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <GenreList />
+    <MangaList />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MangaList from './components/MangaList.vue'
+import GenreList from './components/GenreList.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MangaList,
+    GenreList
   }
 }
 </script>
@@ -21,7 +24,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
