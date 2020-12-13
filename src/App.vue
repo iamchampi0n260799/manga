@@ -1,21 +1,13 @@
 
 <template>
   <div id="app">
-    <GenreList />
-    <MangaList />
+      <router-view />
   </div>
 </template>
 
 <script>
-import MangaList from './components/MangaList.vue'
-import GenreList from './components/GenreList.vue'
-
 export default {
   name: 'App',
-  components: {
-    MangaList,
-    GenreList
-  }
 }
 </script>
 

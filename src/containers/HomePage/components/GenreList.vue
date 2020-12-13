@@ -4,7 +4,7 @@
     <div class="btn-group">
       <button
         type="button"
-        class="btn btn-success dropdown-toggle"
+        class="btn btn-primary dropdown-toggle"
         data-toggle="dropdown"
         aria-haspopup="true"
         aria-expanded="false"
@@ -12,13 +12,15 @@
         Thể loại
       </button>
       <div class="dropdown-menu">
-        <a
-          v-for="genre in genreList"
-          :key="genre.genre_name"
-          class="dropdown-item"
-          href=""
-          >{{ genre.genre_name }}</a
-        >
+        
+            <a
+              v-for="(genre , index) in genreList"
+              :key="index"
+              class="dropdown-item"
+              href=""
+              >{{ genre.genre_name }}
+              </a>
+         
       </div>
     </div>
   </div>
@@ -50,7 +52,6 @@ export default {
 </script>
 <style>
 .genre-list {
-  background-color: black;
   padding: 20px;
 }
 .dropdown-menu {
