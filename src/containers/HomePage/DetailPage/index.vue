@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div v-if="detailManga != null" class="detail-manga">
+  <div v-if="detailManga" class="container">
+    <div class="detail-manga">
       <img class="detail-manga-image" v-bind:src="detailManga.thumb">
       <div class="information mb-3">
         <h1>{{ paramsMangaName }}</h1>
@@ -36,8 +36,12 @@ export default {
       detailManga: null,
     };
   },
-  mounted: function (){
+  created: function (){
     let $vm = this;
+
+    // Start
+    // params name = One Piece
+    // phải modify lại thành one-piece thì mới gọi đc api
     let name = $vm.paramsMangaName;
     let arrayName = name.split(" ");
     let result = [];
@@ -49,7 +53,8 @@ export default {
       stringResult += result[i] + "-";
     }
     let lastResult = stringResult.slice(0, -1);
-    
+
+    // End
     const baseURI = `https://mangamint.kaedenoki.net/api/manga/detail/${lastResult}`;
     Axios.get(baseURI).then((result) => {
       console.log(result.data)
@@ -63,8 +68,8 @@ export default {
   display: flex;
 }
 .detail-manga-image{
-  width: 240px;
-  height: 300px;
+  width: 290px;
+  height: 350px;
   box-shadow: 0 0 8px 0 #757575;
   border-radius: 6px;
 }

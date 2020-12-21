@@ -1,15 +1,24 @@
 <template>
   <div class="hello">
     <h1 class="text-center">Danh sách manga:</h1>
-    <div class="container">
+    
+    <div class="container text-center">
+      <div v-if="loading" class="spinner-border" role="status"></div>
       <div class="row">
         <div v-for="manga in mangaList" :key="manga.title" class="col-3">
           <div class="card" style="width: 18rem">
             <img v-bind:src="manga.thumb" class="card-img-top" alt="..." />
             <div class="card-body">
               <h5 class="card-title">{{ manga.title | shortCut }}</h5>
-              <a href="#">{{ manga.chapter }}</a><br>
-              <router-link :to="{ name: 'mangaDetail', params: { mangaName: manga.title }}">Đọc truyện này</router-link>
+              <a href="#">{{ manga.chapter }}</a
+              ><br />
+              <router-link
+                :to="{
+                  name: 'mangaDetail',
+                  params: { mangaName: manga.title },
+                }"
+                >Read this manga</router-link
+              >
             </div>
           </div>
         </div>
@@ -20,7 +29,9 @@
         <li class="page-item">
           <a class="page-link" href="#">{{ mangaListPage }}</a>
         </li>
-        <li v-on:click="mangaListPage += 1"  class="page-item"><a class="page-link" href="#">Next</a></li>
+        <li v-on:click="mangaListPage += 1" class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
       </ul>
     </nav>
   </div>
@@ -34,14 +45,16 @@ export default {
     return {
       mangaListPage: 1,
       mangaList: null,
+      loading: true,
     };
   },
   filters: {
-  shortCut: function (value) {
-    return value.length > 30 ? value.substr(0, 30) + '...' : value;
-  }
-},
-  mounted() {
+    shortCut: function (value) {
+      return value.length > 30 ? value.substr(0, 30) + "..." : value;
+    },
+  },
+
+  created() {
     axios({
       url: `https://mangamint.kaedenoki.net/api/manga/page/${this.mangaListPage}`,
       method: "GET",
@@ -49,6 +62,7 @@ export default {
       .then((result) => {
         console.log(result.data.manga_list);
         this.mangaList = result.data.manga_list;
+        this.loading = false;
       })
       .catch((err) => {
         console.log(err);
@@ -84,14 +98,17 @@ export default {
 .col-3 {
   height: 300px;
 }
-.card-title{
+.card-title {
   height: 50px;
 }
-.card-img-top{
+.card-img-top {
   border-bottom: 7px solid gold;
   transition: all 0.5s;
 }
-.card-img-top:hover{
+.card-img-top:hover {
   transform: scale(1.1);
+}
+.spinner-border {
+  margin: 0px auto;
 }
 </style>
