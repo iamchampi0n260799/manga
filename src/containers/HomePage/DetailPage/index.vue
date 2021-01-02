@@ -1,5 +1,6 @@
 <template>
-  <div v-if="detailManga" class="container">
+  <div class="container">
+    <div v-if="loading" class="spinner-border" role="status"></div>
     <div class="detail-manga">
       <img class="detail-manga-image" v-bind:src="detailManga.thumb">
       <div class="information mb-3">
@@ -20,7 +21,10 @@
     <h2>Danh sách chương:</h2>
     <div class="chapter">
       <ul v-for="(detail , index) in detailManga.chapter" :key="index">
-        <li><a href="#">{{ detail.chapter_title }}</a></li>
+        <li><router-link :to="{
+                  name: 'chapterEndpoint',
+                  params: { chapterEndpoint: detail.chapter_endpoint},
+                }">{{ detail.chapter_title }}</router-link></li>
       </ul>
     </div>
   </div>
@@ -34,9 +38,10 @@ export default {
     return {
       paramsMangaName: this.$route.params.mangaName,
       detailManga: null,
+      loading: true
     };
   },
-  created: function (){
+  mounted: function (){
     let $vm = this;
 
     // Start
@@ -59,6 +64,7 @@ export default {
     Axios.get(baseURI).then((result) => {
       console.log(result.data)
       $vm.detailManga = result.data;
+      $vm.loading = false
     });
   },
 };

@@ -15,6 +15,8 @@ var _DetailPage = _interopRequireDefault(require("../containers/HomePage/DetailP
 
 var _GenrePage = _interopRequireDefault(require("../containers/HomePage/GenrePage"));
 
+var _ChapterManga = _interopRequireDefault(require("../containers/HomePage/ChapterManga"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _vue["default"].use(_vueRouter["default"]);
@@ -27,6 +29,10 @@ var router = new _vueRouter["default"]({
     path: '/manga/detail/:mangaName',
     name: "mangaDetail",
     component: _DetailPage["default"]
+  }, {
+    path: '/manga/detail/chapter/:chapterEndpoint',
+    name: "chapterEndpoint",
+    component: _ChapterManga["default"]
   }, {
     path: '/genres/:genreName/:page',
     name: "genrePage",

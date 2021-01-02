@@ -4,7 +4,7 @@
     
     <div class="container text-center">
       <div v-if="loading" class="spinner-border" role="status"></div>
-      <div class="row">
+      <div v-if="is_data_fetched" class="row">
         <div v-for="manga in mangaList" :key="manga.title" class="col-3">
           <div class="card" style="width: 18rem">
             <img v-bind:src="manga.thumb" class="card-img-top" alt="..." />
@@ -46,6 +46,7 @@ export default {
       mangaListPage: 1,
       mangaList: null,
       loading: true,
+      is_data_fetched: false
     };
   },
   filters: {
@@ -63,6 +64,7 @@ export default {
         console.log(result.data.manga_list);
         this.mangaList = result.data.manga_list;
         this.loading = false;
+        this.is_data_fetched = true;
       })
       .catch((err) => {
         console.log(err);
